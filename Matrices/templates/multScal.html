@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/operations.css') }}">
+{% if current_user.role == 'admin' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navAdmin.css') }}">
+{% else %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navUser.css') }}">
+{% endif %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link href='https://fonts.googleapis.com/css?family=Space Grotesk' rel='stylesheet'>
+{% endblock %}
+
+
+{% block body %}
+{% include 'header.html' %}
+
+<div class="ani">
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+    <p>&#x3BB;</p>
+</div>
+
+<div class="contents">
+    <div class="top">
+        <div class="txt">
+            <h1>Scalar Multiplication</h1>
+        </div>
+        <div class="logout">
+            <a href="/logout">
+                <button class="button">Logout</button>
+            </a>
+        </div>
+    </div>
+    <div id="mr">
+        <div class="matricesShow" id="multScal">
+            <table id="one" class="matrix">
+                <thead>
+                    <tr>
+                        <th colspan="3">Matrix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in matrix %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="col">
+                <h2>&times;</h2>
+                <h3>{{ scalar }}</h3>
+                <h2>=</h2>
+            </div>
+            <table id="two" class="matrix">
+                <thead>
+                    <tr>
+                        <th colspan="3">Working</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in working %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="col" id="colTwo">
+                <h2>=</h2>
+            </div>
+            <table id="three" class="matrix">
+                <thead>
+                    <tr>
+                        <th colspan="3">Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in result %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/multScal">
+                <button class="button">Reshuffle</button>
+            </a>
+        </div>
+    </div>
+    <div>
+        <h2>Try your own matrix:</h2>
+    </div>
+    <form action="/multScal" method="POST" class="inputForm">
+        <div class="matricesInput" id="multScal">
+            <table id="five" class="matrix">
+                <thead>
+                    <tr>
+                        <th colspan="3">Matrix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in range(1,4) %}
+                    <tr>
+                        {% for c in range(1,4) %}
+                        <td>
+                            <input type="number" placeholder="M{{ c }}{{ r }}" name="M{{ c }}{{ r }}" id="M{{ c }}{{ r }}">
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="col" id="colTwo">
+                <h2>&times;</h2>
+            </div>
+            <input type="number" placeholder="Scalar" name="scalar" id="scalar">
+        </div>
+        <div class="calc">
+            <input type="submit" value="Calculate" class="button">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

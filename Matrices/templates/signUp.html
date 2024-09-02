@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/loginSignUp.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Space Grotesk' rel='stylesheet'>
+{% endblock %}
+
+
+{% block body %}
+<div class="logcontents">
+    <h1>Sign Up Page</h1>
+    <form action="/signup" method='POST' id='form'>
+        <input type="text" name="username" id="username" placeholder="USERNAME" required spellcheck="false">
+        <input type="email" name="email" id="email" placeholder="EMAIL ID" required spellcheck="false">
+        <input type="password" name="password" id="password" placeholder="PASSWORD" required spellcheck="false">
+        <div class="row">
+            <div class="button">
+                <a href="/backlogin">
+                    <input type="button" value ="SIGN IN">
+                </a>
+            </div>
+            <div class="button">
+                <input type="submit" value="SUBMIT">
+            </div>
+        </div>
+    </form>
+    {% if usedUser %}
+    <div class="error">
+        <h3>Username Already Used, Kindly Use A Different Username</h3>
+    </div>
+    {% endif %}
+</div>
+<script>
+    var username = document.getElementById('username');
+    var email = document.getElementById('email');
+    var form = document.getElementById('form');
+
+    form.addEventListener('submit',(e) => {
+        
+        var messages = [];
+        var tlds = ['com','co.in','co.uk','edu','org','gov','biz','info','net'];
+        var words = username.value.split(' ');
+        if(words.length > 1){
+            messages.push("Use A Single Word Username");
+        }
+
+        var emailBr = email.value.split("@");
+        var emailEnd = emailBr[1];
+        if(!emailEnd.includes('.')){
+            messages.push("Enter A Valid Email Domain");
+        }
+        else{
+            var emailEndBr = emailEnd.split('.',2);
+            var tld = emailEndBr[1];
+            if(!tlds.includes(tld)){
+                messages.push("Enter A Valid TLD For Your Email");
+            }
+        }
+
+        if(messages.length>0){
+            e.preventDefault();
+            var message = "Kindly ";
+            for (let i = 0; i < (messages.length - 1); i++){
+                message = message.concat(messages[i]);
+                message = message.concat(" And ");
+            }
+            message = message.concat(messages[messages.length - 1]);
+            alert(message);
+        }
+        
+    })
+
+</script>
+
+{% endblock %}

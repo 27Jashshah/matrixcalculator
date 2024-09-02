@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="nav">
+        <a href="#" class="toggleBox">
+            <span class="icon"></span>
+        </a>
+        <ul class="navItems">
+            <li>
+                <a href="/homepage">
+                    <i class="fa fa-home" style="--i:1"></i>
+                    <span style="--g:1">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/addition">
+                    <i class="fa fa-plus" style="--i:2"></i>
+                    <span style="--g:2">Addition</span>
+                </a>
+            </li>
+            <li>
+                <a href="/subtraction">
+                    <i class="fa fa-minus" style="--i:3"></i>
+                    <span style="--g:3">Subtraction</span>
+                </a>
+            </li>
+            <li>
+                <a href="/multScal">
+                    <i class="fa-solid fa-1" style="--i:4"></i>
+                    <span style="--g:4">Scalar Multiplication</span>
+                </a>
+            </li>
+            <li>
+                <a href="/matrixMult">
+                    <i class="fa fa-xmark" style="--i:5"></i>
+                    <span style="--g:5">Matrix Multiplication</span>
+                </a>
+            </li>
+            <li>
+                <a href="/det">
+                    <i class="fa-solid fa-d" style="--i:6"></i>
+                    <span style="--g:6">Determinant</span>
+                </a>
+            </li>
+            {% if current_user.role == 'admin' %}
+            <li>
+                <a href="/users">
+                    <i class="fa fa-users" style="--i:7"></i>
+                    <span style="--g:7">View Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="/records">
+                    <i class="fa-solid fa-list" style="--i:8"></i>
+                    <span style="--g:8">View Records</span>
+                </a>
+            </li>
+            {% endif %}
+            
+        </ul>
+    </div>
+</div>
+<div id="overlay"></div>
+<script>
+    var toggleClick = document.querySelector(".toggleBox");
+    var nav = document.querySelector(".nav");
+    var overlay = document.getElementById('overlay');
+    toggleClick.addEventListener('click', ()=>{
+        toggleClick.classList.toggle('active');
+        nav.classList.toggle('active');
+        overlay.classList.toggle('active');
+    })
+</script>
