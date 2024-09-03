@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/loginSignUp.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Space Grotesk' rel='stylesheet'>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="ani">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+</div>
+<div class="header">
+    <img src="static/css/logo.png">
+</div>
+<div id="fpd">
+    <div class="logcontents" id="fp">
+        <h1>Enter OTP</h1>
+        <form action="/checkingOTP" method="POST">
+            <div id="otp">
+                <input type="number" name="otp1" id="otp1" min="0" max="9" required placeholder="*" class="otpnum">
+                <input type="number" name="otp2" id="otp2" min="0" max="9" required placeholder="*" class="otpnum">
+                <input type="number" name="otp3" id="otp3" min="0" max="9" required placeholder="*" class="otpnum">
+                <input type="number" name="otp4" id="otp4" min="0" max="9" required placeholder="*" class="otpnum">
+                <input type="number" name="otp5" id="otp5" min="0" max="9" required placeholder="*" class="otpnum">
+                <input type="number" name="otp6" id="otp6" min="0" max="9" required placeholder="*" class="otpnum">
+            </div>
+            <div class="row">
+                <div class="button">
+                    <a href="/forgotPassword">
+                        <input type="button" value="BACK">
+                    </a>
+                </div>
+                <div class="button">
+                    <input type="submit" value="SUBMIT">
+                </div>
+            </div>
+        </form>
+        
+        {% if wrongotp %}
+        <div class="error">
+            <h3>Incorrect OTP, Try Again</h3>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    var elements = document.getElementsByClassName("otpnum");
+    Array.from(elements).forEach(function(element){
+        element.addEventListener("keyup", function(event) {
+            if(event.keyCode === 13 || element.value.length == 1){
+                if(element.nextElementSibling.value.length == 1){
+                    element.nextElementSibling.value = "";
+                }
+                element.nextElementSibling.focus();
+            }
+            if(event.keyCode === 39){
+                element.nextElementSibling.focus();
+            }
+            if(event.keyCode === 37){
+                element.previousElementSibling.focus();
+            }
+            if(element.value.length > 1){
+                element.value = element.value % 10;
+            }
+            if(!['0','1','2','3','4','5','6','7','8','9'].includes(element.value)){
+                element.value = ""
+            }
+
+        });
+    });
+</script>
+
+
+{% endblock %}

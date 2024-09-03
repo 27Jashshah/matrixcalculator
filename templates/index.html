@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Space Grotesk' rel='stylesheet'>
+{% endblock %}
+
+
+{% block body %}
+<div class="ani">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+</div>
+<div class="header">
+    <img src="static/css/logo.png">
+</div>
+<div class="welcome">
+    <h1>WELCOME TO THE MATRIX</h1>
+</div>  
+
+<div class="logcontents">
+    <h1 id="still">WELCOME TO THE MATRIX</h1>
+    <h1 id="appear">Login</h1>
+    <form action="/login" method="POST" id="appear">
+        <input type="text" name="username" id="username" placeholder="USERNAME" required spellcheck="false">
+        <input type="password" name="password" id="password" placeholder="PASSWORD" required spellcheck="false">
+        <div class="forgotP">
+            <a href="/forgotPassword">Forgot Password?</a>
+        </div>
+        <div class="row">
+            <div class="button">
+                <a href="/gotoSignUp">
+                    <input type="button" value="SIGN UP">
+                </a>
+            </div>
+            <div class="button">
+                <input type="submit" value="SUBMIT">
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

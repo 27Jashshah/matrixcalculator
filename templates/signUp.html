@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/loginSignUp.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Space Grotesk' rel='stylesheet'>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="ani">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+</div>
+<div class="header">
+    <img src="static/css/logo.png">
+</div>
+
+<div class="logcontents" id="sp">
+    <h1>Sign Up Page</h1>
+    <form action="/signup" method='POST' id='form'>
+        <input type="text" name="username" id="username" placeholder="USERNAME" required spellcheck="false">
+        <input type="email" name="email" id="email" placeholder="EMAIL ID" required spellcheck="false">
+        <input type="password" name="password1" id="password1" placeholder="PASSWORD" required spellcheck="false">
+        <input type="password" name="password2" id="password2" placeholder="CONFIRM PASSWORD" required spellcheck="false">
+        <div class="row">
+            <div class="button">
+                <a href="/backlogin">
+                    <input type="button" value ="SIGN IN">
+                </a>
+            </div>
+            <div class="button">
+                <input type="submit" value="SUBMIT">
+            </div>
+        </div>
+    </form>
+    {% if usedUser %}
+    <div class="error">
+        <h3>Username Already Used, Kindly Use A Different Username</h3>
+    </div>
+    {% endif %}
+    {% if passMismatch %}
+    <div class="error">
+        <h3>Passwords Do Not Match</h3>
+    </div>
+    {% endif %}
+</div>
+<script>
+    var username = document.getElementById('username');
+    var email = document.getElementById('email');
+    var form = document.getElementById('form');
+
+    form.addEventListener('submit',(e) => {
+        
+        var messages = [];
+        var tlds = ['com','co.in','co.uk','edu','org','gov','biz','info','net'];
+        var words = username.value.split(' ');
+        if(words.length > 1){
+            messages.push("Use A Single Word Username");
+        }
+
+        var emailBr = email.value.split("@");
+        var emailEnd = emailBr[1];
+        if(!emailEnd.includes('.')){
+            messages.push("Enter A Valid Email Domain");
+        }
+        else{
+            var emailEndBr = emailEnd.split('.',2);
+            var tld = emailEndBr[1];
+            if(!tlds.includes(tld)){
+                messages.push("Enter A Valid TLD For Your Email");
+            }
+        }
+
+        if(messages.length>0){
+            e.preventDefault();
+            var message = "Kindly ";
+            for (let i = 0; i < (messages.length - 1); i++){
+                message = message.concat(messages[i]);
+                message = message.concat(" And ");
+            }
+            message = message.concat(messages[messages.length - 1]);
+            alert(message);
+        }
+        
+    })
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/loginSignUp.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Space Grotesk' rel='stylesheet'>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="ani">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoBlue.png">
+    <img src="static/css/logoRed.png">
+</div>
+<div class="header">
+    <img src="static/css/logo.png">
+</div>
+<div id="fpd">
+    <div class="logcontents" id="fp">
+        <h1>Reset Password</h1>
+        <form action="/resettingPass" method="POST">
+        <input type="password" name="password1" id="password1" placeholder="PASSWORD" required spellcheck="false">
+        <input type="password" name="password2" id="password2" placeholder="CONFIRM PASSWORD" required spellcheck="false">
+        <div class="row">
+            <div class="button">
+                <a href="/backlogin">
+                    <input type="button" value ="BACK">
+                </a>
+            </div>
+            <div class="button">
+                <input type="submit" value="SUBMIT">
+            </div>
+        </div>
+        </form>
+        
+        {% if passMismatch %}
+        <div class="error">
+            <h3>Passwords Do Not Match</h3>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
