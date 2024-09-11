@@ -79,7 +79,7 @@ def users():
         return redirect('/logout')
     
 
-@app.route('/deleteuser/<int:id>')
+@app.route('/deleteuser/<uuid:id>')
 def deleteUser(id):
     user = User.query.get_or_404(id)
 
@@ -100,7 +100,7 @@ def records():
         return redirect('/logout')
 
 
-@app.route('/deleterecord/<int:id>')
+@app.route('/deleterecord/<uuid:id>')
 def deleteRecord(id):
     record = Record.query.get_or_404(id)
 
