@@ -692,7 +692,7 @@ def det():
 
 
 
-@app.route('/delete/<int:id>')
+@app.route('/delete/<uuid:id>')
 @login_required
 def delete(id):
     record = Record.query.get_or_404(id)
@@ -705,7 +705,7 @@ def delete(id):
         return 'There was an error deleting the history record'
 
 
-@app.route('/view/<int:id>')
+@app.route('/view/<uuid:id>')
 @login_required
 def view(id):
     record = Record.query.get_or_404(id)
